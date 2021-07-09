@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginRegController;
 use App\Http\Controllers\appNavController;
-/*
+
+
+/*loginRegController
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -21,6 +23,13 @@ Route::get('/', function () {
 Route::get('/hello', function () {
     return view('admin.hello-world');
 });
+/************Login Route starts here */
+Route::get('/singin', [loginRegController::class, 'loginPage']);
+
+Route::post('/singin', [loginRegController::class, 'login']);
+
+Route::post('/singout', [loginRegController::class, 'logout']);
+/************ end of loing and logout route */
 
 Route::get('/singUp', [loginRegController::class, 'regPage']);
 Route::Post('/singUp', [loginRegController::class, 'singUp']);

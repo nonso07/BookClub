@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 class loginRegController extends Controller
@@ -56,4 +58,22 @@ class loginRegController extends Controller
     return redirect('/');
 
     }
+    public function loginPage(){
+
+        return view('loginPage');
+    }
+
+    public function login(Request $request)
+    {
+        
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            // Authentication passed...
+            return redirect()->intended('userDashboard');
+        }
+    }
+
+
+
 }
