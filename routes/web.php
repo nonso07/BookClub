@@ -35,9 +35,16 @@ Route::get('/singUp', [loginRegController::class, 'regPage']);
 Route::Post('/singUp', [loginRegController::class, 'singUp']);
 //Route::get('/singUp', [loginRegController::class, 'singUp']);
 
-//appNavController
+//appNavController 
 Route::get('/ ', [appNavController::class, 'Home']);
 Route::get('/aboutUs ', [appNavController::class, 'about']);
+Route::get('/books ', [appNavController::class, 'books']);
+Route::get('/booksDownload/{mediaItem}', [appNavController::class, 'show']);
+Route::get('/booksList ', [appNavController::class, 'bookList']);
+Route::get('/bookView/{id}/{book_id} ', [appNavController::class, 'bookView']);
+Route::get('/comment ', [appNavController::class, 'comment']);
+
+
 
 
 /* Auto-generated admin routes */
@@ -77,6 +84,51 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'BookTypeController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{bookType}',                                  'BookTypeController@update')->name('update');
             Route::delete('/{bookType}',                                'BookTypeController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('book-uploads')->name('book-uploads/')->group(static function() {
+            Route::get('/',                                             'BookUploadController@index')->name('index');
+            Route::get('/create',                                       'BookUploadController@create')->name('create');
+            Route::post('/',                                            'BookUploadController@store')->name('store');
+            Route::get('/{bookUpload}/edit',                            'BookUploadController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'BookUploadController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{bookUpload}',                                'BookUploadController@update')->name('update');
+            Route::delete('/{bookUpload}',                              'BookUploadController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('book-cats')->name('book-cats/')->group(static function() {
+            Route::get('/',                                             'BookCatController@index')->name('index');
+            Route::get('/create',                                       'BookCatController@create')->name('create');
+            Route::post('/',                                            'BookCatController@store')->name('store');
+            Route::get('/{bookCat}/edit',                               'BookCatController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'BookCatController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{bookCat}',                                   'BookCatController@update')->name('update');
+            Route::delete('/{bookCat}',                                 'BookCatController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('comments')->name('comments/')->group(static function() {
+            Route::get('/',                                             'CommentController@index')->name('index');
+            Route::get('/create',                                       'CommentController@create')->name('create');
+            Route::post('/',                                            'CommentController@store')->name('store');
+            Route::get('/{comment}/edit',                               'CommentController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'CommentController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{comment}',                                   'CommentController@update')->name('update');
+            Route::delete('/{comment}',                                 'CommentController@destroy')->name('destroy');
         });
     });
 });

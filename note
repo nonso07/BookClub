@@ -1,0 +1,17 @@
+password: $2y$10$OmsPmShydOTxoj3NRkQ.XOmcXaTqGUgcE/KZIeBuWt0avy5JInUN.
+email: administrator@brackets.sk
+-----------------------------------------
+Had issues fetching my media form medialibrary package
+https://github.com/spatie/laravel-medialibrary/issues/1531
+______________-----------______________
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+@foreach ($e_books->getMedia('books') as $bookID)
+                
+                      {{--<img src="/media/{{$bookID->id}}/{{$bookID->file_name}}
+                      " alt="" srcset="">--}}
+                <a href="/booksDownload/{{$bookID->id}}"> Download Book</a>
+
+                      @endforeach
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+

@@ -28,3 +28,41 @@ $factory->define(App\Models\BookType::class, static function (Faker\Generator $f
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\BookUpload::class, static function (Faker\Generator $faker) {
+    return [
+        'Book_Titel' => $faker->sentence,
+        'booK_Summry' => $faker->text(),
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\BookCat::class, static function (Faker\Generator $faker) {
+    return [
+        'Book_Titel' => $faker->sentence,
+        'booK_type' => $faker->sentence,
+        'booK_Summry' => $faker->text(),
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Comment::class, static function (Faker\Generator $faker) {
+    return [
+        'user_name' => $faker->sentence,
+        'user_id' => $faker->sentence,
+        'user_comments' => $faker->text(),
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

@@ -47,5 +47,61 @@ return [
         ],
     ],
 
+    'book-upload' => [
+        'title' => 'Book Upload',
+
+        'actions' => [
+            'index' => 'Book Upload',
+            'create' => 'New Book Upload',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'Book_Titel' => 'Book Titel',
+            'booK_Summry' => 'BooK Summry',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
+    'book-cat' => [
+        'title' => 'Book Cat',
+
+        'actions' => [
+            'index' => 'Book Cat',
+            'create' => 'New Book Cat',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'Book_Titel' => 'Book Titel',
+            'booK_type' => 'BooK type',
+            'booK_Summry' => 'BooK Summry',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
+    'comment' => [
+        'title' => 'Comment',
+
+        'actions' => [
+            'index' => 'Comment',
+            'create' => 'New Comment',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'user_name' => 'User name',
+            'user_id' => 'User',
+            'user_comments' => 'User comments',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];
