@@ -59,7 +59,7 @@
                     
                     {{--$e_books->getFirstMedia('books')->getFullUrl()--}}
                     <p>
-                      {!!$e_books->booK_Summry!!}
+                      {{$e_books->booK_type}}
                     </p>
                       @foreach ($e_books->getMedia('Ebooks') as $bookID)
                 

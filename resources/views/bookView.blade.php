@@ -40,46 +40,8 @@
             </div>
           </div>
           <div class="row text-center">
-            <!-- Start Left services -->
-            {{--<img src="/media/2/LvinJsST6XHIaxCccTe8GpbsuVT73OsCmieGWDPv.jpg
-            " alt="" srcset="">-
-            @foreach ($ebooks_list as $e_books)
-                
             
-            <div class="col-md-4 col-sm-4 col-xs-12">
-              <div class="about-move">
-                <div class="services-details">
-                  <div class="single-services">
-                    <a class="services-icon" href="">
-                      <i class="fa fa-download"></i>
-                    </a>
-                    <h4>{{$e_books->Book_Titel}} </h4>
-                    {{--<div class="-item">
-                        <img src="{{$e_books->getFirstMediaUrl('books') }}" />
-                    </div>
-                    {{ $e_books->getFirstMediaUrl('books') }} -}}
-                    <img src="assets/img/pdf_logo.png" alt="PDF Logo">
-                    
-                    {{--$e_books->getFirstMedia('books')->getFullUrl()-}}
-                    <p>
-                      {!!$e_books->booK_Summry!!}
-                    </p>
-                      @foreach ($e_books->getMedia('Ebooks') as $bookID)
-                
-                      {{--<img src="/media/{{$bookID->id}}/{{$bookID->file_name}}
-                      " alt="" srcset=""> bookView  <a href="/booksDownload/{{$bookID->id}}">-}}
-                <a href="/bookView/{{$bookID->id}}"> <button type="button" class="btn btn-primary">Downoload this Book</button></a>
-
-                      @endforeach
-            
-                      
-                  </div>
-                </div>
-                <!-- end about-details -->
-              </div>
-            </div>
-            @endforeach
-        --}}
+        
         {{--<div class="container">--}}
             <div class="container">
                 <div class="row">
@@ -87,10 +49,19 @@
                     <div class="about-move">
                         <div class="services-details">
                           <div class="single-services">
+                            @if (Auth::user()->paid_status)
                             <a class="services-icon" href="/booksDownload/{{$book_id}}">
-                                <button type="button" class="btn btn-primary">
-                                <i class="fa fa-download">Downoload</i>  </button>
-                            </a>
+                              <button type="button" class="btn btn-primary">
+                              <i class="fa fa-download">Downoload</i>  </button>
+                          </a> 
+                          @else
+
+                          <a class="services-icon" href="/premium">
+                            <button type="button" class="btn btn-primary">
+                              <i class="fa fa-cc-mastercard">Downoload</i>  </button>
+                        </a>
+                            @endif
+                            
                         <h4>{{$bookDetails->booK_type}}</h4>
                         <img src="../../assets/img/pdf_logo.png" alt="PDF Logo">
                           <h4><b> Book Titel: {{$bookDetails->Book_Titel}}  </h4>
@@ -98,13 +69,25 @@
                             {!! $bookDetails->booK_Summry	!!}
                             </p>
                           </div>
-                          <form method="POST">
-                              <input type="hidden" name="user_id" value="" >
-                              <input type="hidden" name="user_name" value="">
+                          @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                       <button type="button" class="close" data-dismiss="alert">×</button>    
+                        <strong>{{ $message }}</strong>
+                         </div>
+                         @endif
+                        <form action="{{url('/comment')}}" method="POST">
+                          @csrf    
+                          <input type="hidden" name="user_id" value="{{Auth::id()}}" >
+                          <input type="hidden" name="user_name" value="{{Auth::user()->name}}">
+                      
+                          <input type="hidden" name="id" value="{{$id}}" >  {{-- this is passed so as to redirect back after comment upload --}}
+                          <input type="hidden" name="book_id" value="{{$book_id}}" > {{-- this is passed so as to redirect back after comment upload --}}
+                              
                               <div class="form-group">
-                                  <textarea name="comment" > writ a reviwe about the book</textarea>
+                                <label for="exampleFormControlTextarea1">Your Book Reviwes</label>
+                                <textarea class="ckeditor form-control"  id="" name="user_comments" rows="3"></textarea>
                               </div>
-
+                              <button type="submit" class="btn btn-success">Submit</button>
                           </form>
                         </div>
                         <!-- end about-details -->
@@ -117,10 +100,25 @@
                     <div class="services-details">
                         <div class="single-services">
                           <h3>Users Book Reviwes </h3>
+                          @foreach ($comments as $comment_List)
+                              <H5> Reviwes By: {{$comment_List->user_name}} </H5>
+                              <p> {!!$comment_List->user_comments !!} </p>
+                              @if (Auth::id()== $comment_List->user_id)
+                                 
+                              <div class="flex">
+                              <a href="/editCommte/{{$comment_List->id}}"> <button class="primary">Edit</button> </a>  
+                              <a href="/deletCommte/{{$comment_List->id}}"> <button class="btn btn-danger"> Delete</button></a>
+                              </div>
+                              @endif
+                              
+                          @endforeach
                         </div>
                     </div>
+                    <div class=" about-move">
+                    {{ $comments->links() }}
+                    </div>
                   </div>
-                  
+                    
                 </div>
               </div>
           {{--</div>--}}
@@ -217,5 +215,12 @@
       </div><!-- End Services Section --> --}}
 
   </main><!-- End #main -->
+
+  <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('.ckeditor').ckeditor();
+    });
+</script>
 
   @include('include_footer1')

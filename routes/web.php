@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginRegController;
 use App\Http\Controllers\appNavController;
+use App\Htt\Controllers\PaymentController;
 
 
 /*loginRegController
@@ -42,8 +43,19 @@ Route::get('/books ', [appNavController::class, 'books']);
 Route::get('/booksDownload/{mediaItem}', [appNavController::class, 'show']);
 Route::get('/booksList ', [appNavController::class, 'bookList']);
 Route::get('/bookView/{id}/{book_id} ', [appNavController::class, 'bookView']);
-Route::get('/comment ', [appNavController::class, 'comment']);
+Route::post('/comment ', [appNavController::class, 'comment']);
+Route::get('/editCommte/{id}', [appNavController::class, 'editCommte']);
+Route::get('/deletCommte/{id}', [appNavController::class, 'deletCommte']); //deletCommte
+Route::get('/premium', [appNavController::class, 'premium']); //premium
+/********************************************************* */
+// Laravel 8
+Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
 
+// Laravel 8
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);
+
+
+/**************      ********************* */
 
 
 
@@ -129,6 +141,21 @@ Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->gro
             Route::post('/bulk-destroy',                                'CommentController@bulkDestroy')->name('bulk-destroy');
             Route::post('/{comment}',                                   'CommentController@update')->name('update');
             Route::delete('/{comment}',                                 'CommentController@destroy')->name('destroy');
+        });
+    });
+});
+
+/* Auto-generated admin routes */
+Route::middleware(['auth:' . config('admin-auth.defaults.guard'), 'admin'])->group(static function () {
+    Route::prefix('admin')->namespace('App\Http\Controllers\Admin')->name('admin/')->group(static function() {
+        Route::prefix('receipts')->name('receipts/')->group(static function() {
+            Route::get('/',                                             'ReceiptsController@index')->name('index');
+            Route::get('/create',                                       'ReceiptsController@create')->name('create');
+            Route::post('/',                                            'ReceiptsController@store')->name('store');
+            Route::get('/{receipt}/edit',                               'ReceiptsController@edit')->name('edit');
+            Route::post('/bulk-destroy',                                'ReceiptsController@bulkDestroy')->name('bulk-destroy');
+            Route::post('/{receipt}',                                   'ReceiptsController@update')->name('update');
+            Route::delete('/{receipt}',                                 'ReceiptsController@destroy')->name('destroy');
         });
     });
 });

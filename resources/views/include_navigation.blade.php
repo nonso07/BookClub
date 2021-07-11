@@ -14,10 +14,10 @@
           <ul>
             <li class=""><a href="/">Home</a></li>
             <li><a href="/aboutUs">About</a></li>
-            <li><a href="#">Blogs</a></li>
-            <li><a href="#team">parent</a></li>
+            {{--<li><a href="#">Blogs</a></li>--}}
+            <li><a href="/booksList">Download Books</a></li>
             @if(Auth::check())
-            <li><a href="/userDashboard">Dashboard</a></li>
+            {{--<li><a href="/userDashboard">Dashboard</a></li>--}}
             <li><span> <form method="POST" action="{{url('/singout')}}">
               @csrf 
            <button type="submit" class="btn btn-danger">Logout </button>
@@ -45,7 +45,7 @@
                 <li><a href="#">Drop Down 5</a></li>
               </ul>
             </li> --}}
-            <li><a href="/contactUs">Contact</a></li>
+            <li><a href="/premium">Price</a></li>
   
           </ul>
         </nav><!-- .nav-menu -->

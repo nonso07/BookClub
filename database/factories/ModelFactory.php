@@ -66,3 +66,22 @@ $factory->define(App\Models\Comment::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Receipt::class, static function (Faker\Generator $faker) {
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'Department' => $faker->sentence,
+        'Reg_no' => $faker->sentence,
+        'phoneNum' => $faker->sentence,
+        'trans_id' => $faker->sentence,
+        'amount' => $faker->randomNumber(5),
+        'fees' => $faker->randomNumber(5),
+        'Receipt_plan' => $faker->sentence,
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

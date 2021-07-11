@@ -103,5 +103,30 @@ return [
         ],
     ],
 
+    'receipt' => [
+        'title' => 'Receipts',
+
+        'actions' => [
+            'index' => 'Receipts',
+            'create' => 'New Receipt',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'first_name' => 'First name',
+            'last_name' => 'Last name',
+            'Department' => 'Department',
+            'Reg_no' => 'Reg no',
+            'phoneNum' => 'PhoneNum',
+            'trans_id' => 'Trans',
+            'amount' => 'Amount',
+            'fees' => 'Fees',
+            'Receipt_plan' => 'Receipt plan',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];
