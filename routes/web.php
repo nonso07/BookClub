@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\loginRegController;
 use App\Http\Controllers\appNavController;
-use App\Htt\Controllers\PaymentController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PDFreceiptController;
 
 
 /*loginRegController
@@ -35,6 +36,12 @@ Route::post('/singout', [loginRegController::class, 'logout']);
 Route::get('/singUp', [loginRegController::class, 'regPage']);
 Route::Post('/singUp', [loginRegController::class, 'singUp']);
 //Route::get('/singUp', [loginRegController::class, 'singUp']);
+
+//Recipt for paid members
+Route::get('/pdfpreview', [PDFreceiptController::class, 'preview'])->name('pdf.preview');
+Route::get('/pdfgenerate', [PDFreceiptController::class, 'generatePDF'])->name('pdf.generate');
+Route::get('/viewReceipt', [PDFreceiptController::class,'viewReceipt']);
+/******************************************************** */
 
 //appNavController 
 Route::get('/ ', [appNavController::class, 'Home']);

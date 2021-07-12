@@ -78,7 +78,7 @@ class PaymentController extends Controller
           $test->paid_status=true;
           $test->save();
       
-          return redirect('/booksList');
+          return redirect('/viewReceipt');
              }else{
                   return redirect('/premium');
              }

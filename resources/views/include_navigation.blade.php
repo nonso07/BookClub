@@ -17,7 +17,7 @@
             {{--<li><a href="#">Blogs</a></li>--}}
             <li><a href="/booksList">Download Books</a></li>
             @if(Auth::check())
-            {{--<li><a href="/userDashboard">Dashboard</a></li>--}}
+            
             <li><span> <form method="POST" action="{{url('/singout')}}">
               @csrf 
            <button type="submit" class="btn btn-danger">Logout </button>
@@ -45,7 +45,11 @@
                 <li><a href="#">Drop Down 5</a></li>
               </ul>
             </li> --}}
-            <li><a href="/premium">Price</a></li>
+            @if (Auth::user()->paid_status)
+            <li><a href="/viewReceipt">View Recipet</a></li>     
+            @else
+            <li><a href="/premium">Premium</a></li>
+            @endif
   
           </ul>
         </nav><!-- .nav-menu -->
