@@ -61,8 +61,6 @@ class loginRegController extends Controller
             // Authentication passed...
              return redirect('/profile');
     // return redirect()->intended('/booksList');
-        }else{
-            return redirect('/singin')->withErrors($validator, 'login');
         }
 
     }
