@@ -12,21 +12,24 @@ use Paystack;
 
 class appNavController extends Controller
 {
-    //
+    // home page function 
     public function Home(){
-
-        return view('index');
+     /*
+  This command means that this function 
+  should return this blade(i.e HTML and CSS pages) page called index
+     */
+        return view('index'); 
     }
 
     public function about(){
         return view('aboutUs');
     }
 
-    public function books(){
-        $ebooks= BookUpload::with('media')->get();
-
+    public function books(){ // Book list function 
+        $ebooks= BookUpload::with('media')->get(); // query the database using  eloquent
+       // Eloquent replaces sql command in core php
         return view('books', [
-           'ebooks'=> $ebooks
+           'ebooks'=> $ebooks // this passes the data assosciated to the modle table in form of arrary 
         ]);
         /*
         foreach ($ebooks as $books) {
@@ -56,7 +59,6 @@ class appNavController extends Controller
     public function bookList(){
 
         $ebooks_list=BookCat::with('media')->where('enabled', 1)->get();
-
         return view('list_of_ebooks', [
            'ebooks_list' => $ebooks_list
         ]);
@@ -68,8 +70,9 @@ class appNavController extends Controller
         if (auth()->user()) {
         $bookDetails= BookCat::find($id);
         $comments=  Comment::where([['enabled', 1],['book_id', $book_id]])->orderBy('id', 'desc')->paginate(15); //->get();
-        //->orderBy('id', 'desc')
-       // ->paginate(10);
+        //This will pass all the comments form the comment table.
+        $openEdit=false;
+       
         return view('bookView',[
             'bookDetails'=> $bookDetails,
             'book_id'=> $book_id,
@@ -82,7 +85,7 @@ class appNavController extends Controller
         }
     }
 
-    public function comment(Request $request){
+    public function comment(Request $request){ // This function is use to post comment
        // $validated = $request->validated();
       
        $validated = $request->validate([
@@ -105,7 +108,7 @@ class appNavController extends Controller
 
     public function editCommte($id){
         if (Auth::id()== $request['user_id']) {
-         
+         $this->openEdit=true;
     }else{
         return redirect('/');
         }
@@ -132,6 +135,26 @@ class appNavController extends Controller
         return view('premium',[
            'amountToPay'=> $amountToPay
         ]);
+    }
+
+    public function profile(){
+          
+        if(Auth::check()){
+        return view('profile',[
+            'user_profile'
+        ]);
+        }else {
+            return redirect('/singin');
+        }
+    }
+
+    public function profilEdit()
+    {
+        if(Auth::check()){
+            return view('profilEdit');
+        }else{
+            return redirect('/singin');
+        }
     }
 
     

@@ -33,18 +33,20 @@ Route::post('/singin', [loginRegController::class, 'login']);
 Route::post('/singout', [loginRegController::class, 'logout']);
 /************ end of loing and logout route */
 
-Route::get('/singUp', [loginRegController::class, 'regPage']);
-Route::Post('/singUp', [loginRegController::class, 'singUp']);
+Route::get('/singUp', [loginRegController::class, 'regPage']); // leading to the login page
+Route::Post('/singUp', [loginRegController::class, 'singUp']); // This route get the post requst from the login post
+Route::post('/updateUserForm', [loginRegController::class, 'updateUserForm']); //update rout
+Route::post('imgEdit', [loginRegController::class, 'imgEdit'])->name('imgEdit'); // Change image route
 //Route::get('/singUp', [loginRegController::class, 'singUp']);
 
 //Recipt for paid members
-Route::get('/pdfpreview', [PDFreceiptController::class, 'preview'])->name('pdf.preview');
-Route::get('/pdfgenerate', [PDFreceiptController::class, 'generatePDF'])->name('pdf.generate');
+Route::get('/pdfpreview', [PDFreceiptController::class, 'preview'])->name('pdf.preview'); // view recipet page rout for paid user
+Route::get('/pdfgenerate', [PDFreceiptController::class, 'generatePDF'])->name('pdf.generate'); // generating recipet to pdf
 Route::get('/viewReceipt', [PDFreceiptController::class,'viewReceipt']);
 /******************************************************** */
 
 //appNavController 
-Route::get('/ ', [appNavController::class, 'Home']);
+Route::get('/ ', [appNavController::class, 'Home']); // Home page route
 Route::get('/aboutUs ', [appNavController::class, 'about']);
 Route::get('/books ', [appNavController::class, 'books']);
 Route::get('/booksDownload/{mediaItem}', [appNavController::class, 'show']);
@@ -54,12 +56,14 @@ Route::post('/comment ', [appNavController::class, 'comment']);
 Route::get('/editCommte/{id}', [appNavController::class, 'editCommte']);
 Route::get('/deletCommte/{id}', [appNavController::class, 'deletCommte']); //deletCommte
 Route::get('/premium', [appNavController::class, 'premium']); //premium
+Route::get('/profile', [appNavController::class, 'profile']); //profile page route
+Route::get('/profilEdit', [appNavController::class, 'profilEdit']); //edit user profile
 /********************************************************* */
 // Laravel 8
-Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay');
+Route::post('/pay', [App\Http\Controllers\PaymentController::class, 'redirectToGateway'])->name('pay'); // paystack route
 
 // Laravel 8
-Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);
+Route::get('/payment/callback', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback']);// paystack route 
 
 
 /**************      ********************* */

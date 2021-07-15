@@ -36,6 +36,17 @@
 </head>
 <body>
 <div class="login-form">
+    {{--@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+--}}
+
     {{--<form action="/examples/actions/confirmation.php" method="post">--}}
         <form method="POST" action="{{url('/singin')}}">
             @csrf 
