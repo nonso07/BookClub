@@ -85,3 +85,15 @@ $factory->define(App\Models\Receipt::class, static function (Faker\Generator $fa
         
     ];
 });
+/** @var  \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Models\Student::class, static function (Faker\Generator $faker) {
+    return [
+        'First' => $faker->sentence,
+        'Reg_num' => $faker->sentence,
+        'enabled' => $faker->boolean(),
+        'created_at' => $faker->dateTime,
+        'updated_at' => $faker->dateTime,
+        
+        
+    ];
+});

@@ -128,5 +128,23 @@ return [
         ],
     ],
 
+    'student' => [
+        'title' => 'Student',
+
+        'actions' => [
+            'index' => 'Student',
+            'create' => 'New Student',
+            'edit' => 'Edit :name',
+        ],
+
+        'columns' => [
+            'id' => 'ID',
+            'First' => 'First',
+            'Reg_num' => 'Reg num',
+            'enabled' => 'Enabled',
+            
+        ],
+    ],
+
     // Do not delete me :) I'm used for auto-generation
 ];

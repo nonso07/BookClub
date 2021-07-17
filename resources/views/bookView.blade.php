@@ -49,7 +49,7 @@
                     <div class="about-move">
                         <div class="services-details">
                           <div class="single-services">
-                            @if (Auth::user()->paid_status)
+                            @if (Auth::user()->paid_status || Auth::user()->is_css_Student )
                             <a class="services-icon" href="/booksDownload/{{$book_id}}">
                               <button type="button" class="btn btn-primary">
                               <i class="fa fa-download">Downoload</i>  </button>

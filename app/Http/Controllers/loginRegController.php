@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Student;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class loginRegController extends Controller
 {
-    //
+    // this function lead to the singup form which is in the singup form
     public function regPage(){
     
         return view('singUp');
@@ -35,6 +36,16 @@ class loginRegController extends Controller
          'address'=> 'required', */
 
     ]);
+
+      //check if the  user is computer scienes student, 
+    $computer_sci_stud= Student::where('Reg_num', $request['Reg_num'] )->get();  
+     
+   // dd($computer_sci_stud); 
+      if(count($computer_sci_stud)){
+          $our_student=true;
+      }else{
+          $our_student=false;
+      }
     if ($request->hasFile('avater_name')){
         $imageName = time().'_'.$request->file('avater_name')->getClientOriginalName();
                 $filePath = $request->file('avater_name')->storeAs('uploads', $imageName, 'public');
@@ -53,6 +64,7 @@ class loginRegController extends Controller
             'department'=>$request['department'],
              'DOB'=> $request['DOB'],
             'avater_name'=> $imageName,
+            'is_css_Student'=> $our_student, 
            
     ]);
     $credentials = $request->only('email', 'password');
@@ -62,6 +74,8 @@ class loginRegController extends Controller
              return redirect('/profile');
     // return redirect()->intended('/booksList');
         }
+       
+     
 
     }
     public function loginPage(){
